@@ -41,10 +41,9 @@ module HexController(clk, reset, dbus, address, wrtEn, HEX0, HEX1, HEX2, HEX3);
 	always @ (posedge clk) begin
 		if(reset==1'b1) hex <= 16'h0000;
 		else if(wrtHex) hex <= dbus[15:0];
-		else hex <= 16'hDEAD;
 	end
 	
 	//read from hexes
-	assign dbus = rdHex ? {16'h0000, hex} : {DBITS{1'bz}};
+	//assign dbus = rdHex ? {16'h0000, hex} : {DBITS{1'bz}};
 
 endmodule

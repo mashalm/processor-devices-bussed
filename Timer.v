@@ -39,6 +39,7 @@ module Timer(clk, reset, dbus, address, wrtEn);
 			if(tctrl[0] == 1'b1) tctrl[2] <= 1;
 			else tctrl[0] <= 1'b1;
 		end
+		//get it to only decrement every 1sec
 		else if(cycles == CLKDIV-1) begin
 			cycles <= 32'd0;
 			tcount <= tcount + 1;

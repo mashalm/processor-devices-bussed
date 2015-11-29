@@ -1,5 +1,6 @@
 
-module KeyController(clk, reset, dbus, address, wrtEn, keys);
+module KeyController(clk, reset, 
+	dbus, address, wrtEn, keys);
 
 	parameter DBITS = 32;
 	parameter MY_NAMESPACE = 32'hF000_0010;
@@ -20,7 +21,7 @@ module KeyController(clk, reset, dbus, address, wrtEn, keys);
 	//keycont has two regs: one handling its data,
 	//and the other holding some control info <- aren't doing
 	reg ready, overrun;
-	reg[3:0] kdata, prevKdata;
+	reg[3:0] prevKdata;
 	
 	always @ (posedge clk) begin
 		if(reset == 1'b1) begin

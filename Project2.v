@@ -18,7 +18,7 @@ module Project2(SW,KEY,LEDR,LEDG,HEX0,HEX1,HEX2,HEX3,CLOCK_50);
 	parameter START_PC						= 32'h40;
 	parameter REG_INDEX_BIT_WIDTH			= 4;
 
-	parameter IMEM_INIT_FILE				= "Sorter2.mif";
+	parameter IMEM_INIT_FILE				= "Test2.mif";
 
 	parameter IMEM_ADDR_BIT_WIDTH			= 11;
 	parameter IMEM_DATA_BIT_WIDTH			= INST_BIT_WIDTH;
@@ -53,6 +53,7 @@ module Project2(SW,KEY,LEDR,LEDG,HEX0,HEX1,HEX2,HEX3,CLOCK_50);
 	wire [15:0] hex;
 	wire [IMEM_DATA_BIT_WIDTH - 1 : 0] instWord;
 	wire [DBITS - 1 : 0] pcIn, pcOut, incrementedPC, pcAdderOut, aluOut, signExtImm, dataMuxOut, sr1Out, sr2Out, sr1OutUnForwarded, sr2OutUnForwarded, aluMuxOut, memDataOut, sextOut, aluOutOut, dataOut, pcOutOut;
+	//for bussing:
 	wire [DBITS-1: 0] address;
 	tri [DBITS-1: 0] dbus;
 	
