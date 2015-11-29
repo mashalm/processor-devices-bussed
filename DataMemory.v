@@ -25,13 +25,15 @@ module DataMemory(clk, wrtEn, addr, dbus);
 	reg [DATA_BIT_WIDTH - 1 : 0] key_reg;
 	*/
 
+	wire rdMem = (!wrtEn && addr[28]==1'b0);
+	
 	always @(posedge clk) begin
 		if (wrtEn && addr[28]==1'b0)
-			data[addr[TRUE_ADDR_BIT_WIDTH+2:2]] <= dbus;
+			data[addr[ADDR_BIT_WIDTH - 1 : 0]] <= dbus;
    end
 	 
-	assign dbus = (!wrtEn && addr[28]==1'b0) ? 
-	 data[addr[TRUE_ADDR_BIT_WIDTH + 2 : 2]] : 32'd0;
+	assign dbus = rdMem ? 
+	 data[addr[ADDR_BIT_WIDTH - 1 : 0]] : {DATA_BIT_WIDTH{1'bz}};
 	
 	/*always @(negedge clk) begin
 		if (wrtEn && !addr[29]) data[addr[13:2]] <= dIn;

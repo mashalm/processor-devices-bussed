@@ -54,7 +54,7 @@ module Project2(SW,KEY,LEDR,LEDG,HEX0,HEX1,HEX2,HEX3,CLOCK_50);
 	wire [IMEM_DATA_BIT_WIDTH - 1 : 0] instWord;
 	wire [DBITS - 1 : 0] pcIn, pcOut, incrementedPC, pcAdderOut, aluOut, signExtImm, dataMuxOut, sr1Out, sr2Out, sr1OutUnForwarded, sr2OutUnForwarded, aluMuxOut, memDataOut, sextOut, aluOutOut, dataOut, pcOutOut;
 	wire [DBITS-1: 0] address;
-	wire [DBITS-1: 0] dbus;
+	tri [DBITS-1: 0] dbus;
 	
 	
 	// Create PCMUX
@@ -132,7 +132,7 @@ module Project2(SW,KEY,LEDR,LEDG,HEX0,HEX1,HEX2,HEX3,CLOCK_50);
 	);
 	
 	assign address = aluOutOut;
-	assign dbus = memWrtOut ? dataOut : 32'd0;
+	assign dbus = memWrtOut ? dataOut : {DBITS{1'bz}};
 	
 	// Create SignExtension
 	SignExtension #(16, DBITS) signExtension (
@@ -289,7 +289,7 @@ module Project2(SW,KEY,LEDR,LEDG,HEX0,HEX1,HEX2,HEX3,CLOCK_50);
 	Mux3to1 #(DBITS) dataMux (
 		.sel({jalOut, memToRegOut}),
 		.dInSrc1(aluOutOut),
-		.dInSrc2(memDataOut),
+		.dInSrc2(dbus),
 		.dInSrc3(pcOutOut),
 		.dOut(dataMuxOut)
 	);

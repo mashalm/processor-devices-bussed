@@ -45,6 +45,6 @@ module HexController(clk, reset, dbus, address, wrtEn, HEX0, HEX1, HEX2, HEX3);
 	end
 	
 	//read from hexes
-	assign dbus = rdHex ? {16'h0000, hex} : 32'd0;
+	assign dbus = rdHex ? {16'h0000, hex} : {DBITS{1'bz}};
 
 endmodule

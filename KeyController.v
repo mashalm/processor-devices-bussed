@@ -46,6 +46,6 @@ module KeyController(clk, reset, dbus, address, wrtEn, keys);
 	
 	assign dbus = rdKdata ? {28'd0, prevKdata} :
 						rdKCtrl ? {29'd0, overrun,1'b0,ready} :
-						32'd0;
+						{DBITS{1'bz}};
 
 endmodule

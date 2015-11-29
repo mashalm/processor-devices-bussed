@@ -49,6 +49,6 @@ module Timer(clk, reset, dbus, address, wrtEn);
 	assign dbus = rdCtrl ? tctrl : 
 						rdCount ? tcount :
 						rdLim ? tlim :
-						{DBITS{1'b0}};
+						{DBITS{1'bz}};
 
 endmodule

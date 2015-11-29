@@ -23,6 +23,6 @@ module LEDController(clk, reset, dbus, address, wrtEn, led);
 	end
 	
 	//reading from leds:
-	assign dbus = rdLed ? {22'b0,ledData} : 32'd0;
+	assign dbus = rdLed ? {22'b0,ledData} : {DBITS{1'bz}};
 	
 endmodule

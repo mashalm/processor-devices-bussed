@@ -57,6 +57,6 @@ module SwitchController(clk, reset, wrtEn, dbus, address, switches);
 	
 	assign dbus = rdSwitches ? {22'd0, swData} :
 						rdSwCtrl ? {29'd0,overrun,1'b0,ready} :
-						32'd0;
+						{DBITS{1'bz}};
 	
 endmodule
