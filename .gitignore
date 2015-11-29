@@ -1,0 +1,8 @@
+#ignore everything except
+*
+!.gitignore
+!*.v
+!*.qpf
+!*.mif
+!*.a32
+!*.stp
