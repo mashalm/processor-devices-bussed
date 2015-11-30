@@ -17,7 +17,8 @@ module HexController(clk, reset, dbus, address, wrtEn, HEX0, HEX1, HEX2, HEX3);
 	always @ (posedge clk) begin
 		if(reset==1'b1) hex <= 16'h0000;
 		else begin
-			hex <= wrtEn ? dbus[15:0] : 16'h0000;
+			if(wrtEn) hex <= dbus[15:0];
+			//hex <= wrtEn ? dbus[15:0] : 16'h0000;
 		end
 	end
 	
