@@ -7,13 +7,23 @@ module HexController(clk, reset, dbus, address, wrtEn, HEX0, HEX1, HEX2, HEX3);
 	input clk, reset, wrtEn;
 	inout[DBITS-1:0] dbus;
 	input[DBITS-1:0] address;
-	output wire[6:0] HEX0, HEX1, HEX2, HEX3;
+	output [6:0] HEX0, HEX1, HEX2, HEX3;
 	
 	reg[15:0] hex;
 	
 	wire wrtHex = (address == MY_NAMESPACE) && wrtEn;
 	wire rdHex = (address == MY_NAMESPACE) && !wrtEn;
-
+	
+	always @ (posedge clk) begin
+		if(reset==1'b1) hex <= 16'h0000;
+		else begin
+			hex <= wrtEn ? dbus[15:0] : 16'h0000;
+		end
+	end
+	
+	//read from hexes
+	assign dbus = rdHex ? {16'h0000, hex} : {DBITS{1'bz}};
+	
 	// Create SevenSeg for HEX3
 	SevenSeg sevenSeg3 (
 		.dIn(hex[15:12]),
@@ -37,13 +47,5 @@ module HexController(clk, reset, dbus, address, wrtEn, HEX0, HEX1, HEX2, HEX3);
 		.dIn(hex[3:0]),
 		.dOut(HEX0)
 	);
-	
-	always @ (posedge clk) begin
-		if(reset==1'b1) hex <= 16'h0000;
-		else if(wrtHex) hex <= dbus[15:0];
-	end
-	
-	//read from hexes
-	//assign dbus = rdHex ? {16'h0000, hex} : {DBITS{1'bz}};
 
 endmodule

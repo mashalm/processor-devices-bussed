@@ -30,11 +30,11 @@ module DataMemory(clk, wrtEn, addr, dbus);
 	
 	always @(posedge clk) begin
 		if (wrtMem)
-			data[addr[TRUE_ADDR_BIT_WIDTH + 2 : 2]] <= dbus;
+			data[addr[ADDR_BIT_WIDTH -1:0]] <= dbus;
    end
 	 
 	assign dbus = rdMem ? 
-	 data[addr[TRUE_ADDR_BIT_WIDTH + 2 : 2]] : {DATA_BIT_WIDTH{1'bz}};
+	 data[addr[ADDR_BIT_WIDTH -1 : 0]] : {DATA_BIT_WIDTH{1'bz}};
 	
 	/*always @(negedge clk) begin
 		if (wrtEn && !addr[29]) data[addr[13:2]] <= dIn;

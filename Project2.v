@@ -28,16 +28,16 @@ module Project2(SW,KEY,LEDR,LEDG,HEX0,HEX1,HEX2,HEX3,CLOCK_50);
 	parameter IMEM_PC_BITS_HI				= IMEM_ADDR_BIT_WIDTH + 2;
 	parameter IMEM_PC_BITS_LO				= 2;
 	
-	parameter HEX_ADDR = 32'hF000_0000;
-	parameter KEY_ADDR = 32'hF000_0010;
-	parameter KCTRL_ADDR = 32'hF000_0110;
-	parameter SWITCH_ADDR = 32'hF000_0014;
-	parameter SWCTRL_ADDR = 32'hF000_0114;
-	parameter LEDR_ADDR = 32'hF000_0004;
-	parameter LEDG_ADDR = 32'hF000_0008;
-	parameter TCOUNT_ADDR = 32'hF000_0020;
-	parameter TLIM_ADDR = 32'hF000_0024;
-	parameter TCTRL_ADDR = 32'hF000_0120;
+	parameter HEX_ADDR 						= 32'hF000_0000;
+	parameter KEY_ADDR 						= 32'hF000_0010;
+	parameter KCTRL_ADDR 					= 32'hF000_0110;
+	parameter SWITCH_ADDR 					= 32'hF000_0014;
+	parameter SWCTRL_ADDR 					= 32'hF000_0114;
+	parameter LEDR_ADDR 						= 32'hF000_0004;
+	parameter LEDG_ADDR 						= 32'hF000_0008;
+	parameter TCOUNT_ADDR 					= 32'hF000_0020;
+	parameter TLIM_ADDR 						= 32'hF000_0024;
+	parameter TCTRL_ADDR 					= 32'hF000_0120;
 
 	//PLL, clock genration, and reset generation
 	wire clk, lock;

@@ -27,21 +27,24 @@ module KeyController(clk, reset,
 		if(reset == 1'b1) begin
 			ready <= 1'b0;
 			overrun <= 1'b0;
-			prevKdata <= 4'h0;
+			prevKdata <= keys;
 		end 
 		else begin
 			if(rdKdata) begin
 				ready <= 1'b0;
-				overrun <= 1'b0;
+				//overrun <= 1'b0;
+			end
+			else if(keys != prevKdata) begin
+				//prevKdata <= keys;
+				//if(ready==1'b1) overrun<=1'b1;
+				//else ready <=1'b1;
+				ready <=1'b1;
 			end
 			else if(wrtKCtrl) begin
 				if(dbus[2]==1'b0) overrun <= dbus[2];
 			end
-			if(keys != prevKdata) begin
-				prevKdata <= keys;
-				if(ready==1'b1) overrun<=1'b1;
-				else ready <=1'b1;
-			end
+			else if(keys != prevKdata && ready==1'b1) overrun <= 1'b1;
+			prevKdata <= keys;
 		end		
 	end //always
 	
